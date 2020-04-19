@@ -33,7 +33,7 @@ export default class GoogleMap extends Component {
 
   createGoogleMap = (lat, lng) => 
     new window.google.maps.Map(this.googleMapRef.current, {
-      zoom: 15,
+      zoom: 14,
       center: {
         lat: lat, 
         lng: lng,
