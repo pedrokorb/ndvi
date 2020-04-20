@@ -21,3 +21,13 @@ The purpose of this software is to display the NDVI images of the user's areas. 
 - Tailwind CSS
 - Turf JS
 - Google Maps API
+
+### To run this application
+Run `yarn` or `npm install` to install all the dependencies.
+Add a file called `.env` at the root of project and add the following lines:
+`REACT_APP_GOOGLE_MAPS_API_KEY=<insert your API KEY here>`
+Now you can run the command `yarn start` or `npm start` to run the project
+
+### Screenshots
+https://user-images.githubusercontent.com/29802533/79703483-7ba52000-8282-11ea-855a-0d35b1a4e6a8.jpg
+https://user-images.githubusercontent.com/29802533/79703486-81026a80-8282-11ea-8517-729767e01b1d.jpg
