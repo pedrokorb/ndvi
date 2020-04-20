@@ -15,6 +15,7 @@ The purpose of this software is to display the NDVI images of the user's areas. 
 - Calculation of NDVI;
 - Dynamizing users;
 - Dynamizing areas;
+- Grain culture quotation;
 
 ### Tecnologies used
 - ReactJS
