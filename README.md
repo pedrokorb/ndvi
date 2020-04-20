@@ -29,5 +29,5 @@ Add a file called `.env` at the root of project and add the following lines:
 Now you can run the command `yarn start` or `npm start` to run the project
 
 ### Screenshots
-https://user-images.githubusercontent.com/29802533/79703483-7ba52000-8282-11ea-855a-0d35b1a4e6a8.jpg
-https://user-images.githubusercontent.com/29802533/79703486-81026a80-8282-11ea-8517-729767e01b1d.jpg
+![Mobile](https://user-images.githubusercontent.com/29802533/79703483-7ba52000-8282-11ea-855a-0d35b1a4e6a8.jpg "Mobile")
+![Desktop](https://user-images.githubusercontent.com/29802533/79703486-81026a80-8282-11ea-8517-729767e01b1d.jpg "Desktop")
