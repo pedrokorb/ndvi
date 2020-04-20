@@ -24,8 +24,10 @@ The purpose of this software is to display the NDVI images of the user's areas. 
 
 ### To run this application
 Run `yarn` or `npm install` to install all the dependencies.
-Add a file called `.env` at the root of project and add the following lines:
+Add a file called `.env` at the root of project and add the following line:
+
 `REACT_APP_GOOGLE_MAPS_API_KEY=<insert your API KEY here>`
+
 Now you can run the command `yarn start` or `npm start` to run the project
 
 ### Screenshots
