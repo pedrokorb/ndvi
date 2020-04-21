@@ -22,6 +22,7 @@ The purpose of this software is to display the NDVI images of the user's areas. 
 - Tailwind CSS
 - Turf JS
 - Google Maps API
+- Google Earth Engine
 
 ### To run this application
 Run `yarn` or `npm install` to install all the dependencies.
