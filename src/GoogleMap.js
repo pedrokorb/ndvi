@@ -8,26 +8,49 @@ const GOOGLE_MAPS_API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 const resources = new Resources();
 const turfFunctions = new TurfFunctions();
 
+//Create Areas
+// https://us-central1-ndvi-2-a57f9.cloudfunctions.net/createAreas
+// Get Areas
+//  https://us-central1-ndvi-2-a57f9.cloudfunctions.net/getAreas
+
 export default class GoogleMap extends Component {
   googleMapRef = createRef()
 
-  componentDidMount() {
+  async componentDidMount() {
     const googleMapScript = document.createElement('script')
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=drawing,geometry`
     window.document.body.appendChild(googleMapScript);
 
-    googleMapScript.addEventListener('load', () => {
-      let areas = resources.getAreas();
+    googleMapScript.addEventListener('load', async() => {
+      
+      let areasFromFirebase = await resources.getAreasFromFirebase();
+      let areasFiltered = [];
+      areasFromFirebase.forEach(area => {
+        let coordinatesFiltered = []
+        area.coordinates.forEach(coordinate => {
+          coordinatesFiltered.push(
+            {
+              lat: coordinate._latitude,
+              lng: coordinate._longitude
+            }
+          )
+        })
+        areasFiltered.push(coordinatesFiltered);
+      })
+      console.log("firebase",areasFromFirebase);
+      console.log("filtered",areasFiltered);
 
-      let center = turfFunctions.calculateCenterOfMap(areas);
+      let center = turfFunctions.calculateCenterOfMap(areasFiltered);
       
       this.googleMap = this.createGoogleMap(center.lat, center.lng)
       this.marker = this.createMarker()
       this.createDrawingManager();
 
-      areas.map(area => {
+      // eslint-disable-next-line array-callback-return
+      areasFiltered.map(area => {
         this.createPolygon(area);
       })
+
     })
   }
 
@@ -65,17 +88,20 @@ export default class GoogleMap extends Component {
       });
       drawingManager.setMap(this.googleMap);
       
-      window.google.maps.event.addListener(drawingManager, 'polygoncomplete', function (polygon) {
+      window.google.maps.event.addListener(drawingManager, 'polygoncomplete', async function (polygon) {
         let path = polygon.getPath()
         let coordinates = [];
 
         for (let i = 0; i < path.length; i++) {
           coordinates.push({
-            lat: path.getAt(i).lat(),
-            lng: path.getAt(i).lng()
+            _latitude: path.getAt(i).lat(),
+            _longitude: path.getAt(i).lng()
           });
         }
         console.log(coordinates);
+        let name = prompt("Digite um nome para esta área");
+        console.log(name);
+        await resources.saveAreas(coordinates, name)
       });
   }
 

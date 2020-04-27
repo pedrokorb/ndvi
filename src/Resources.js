@@ -1,3 +1,8 @@
+import axios from 'axios';
+
+const PROXY = 'https://cors-anywhere.herokuapp.com/';
+const API_URL = process.env.REACT_APP_FIREBASE_URL;
+
 const Resources = class {
   getAreas(){
     let areas = [];
@@ -196,6 +201,29 @@ const Resources = class {
 
     return areas;
   }
+
+  async getAreasFromFirebase(){
+    let res = await axios.get(`${PROXY}${API_URL}/getAreas`);
+
+    return res.data;
+  }
+
+  async saveAreas(coordinates, name){
+    axios.post(`${PROXY}${API_URL}/createAreas`, {
+      type: 'Feature',
+      geometryType: 'polygon',
+      propertiesName: name,
+      coordinates: coordinates
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+
 
 };
 export default Resources;
